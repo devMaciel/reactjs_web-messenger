@@ -1,6 +1,8 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import rootReducer from '../reducers';
+import thunk from 'redux-thunk';
 
-const store = createStore(rootReducer);
+//thunk pra async action
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;

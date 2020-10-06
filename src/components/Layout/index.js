@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Header from '../Header';
 
 /**
 * @author
@@ -8,7 +9,7 @@ import React from 'react'
 const Layout = (props) => {
   return(
     <div>
-        <header>Header</header>
+        <Header />
         {props.children}
     </div>
    )

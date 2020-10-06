@@ -1,4 +1,5 @@
 import React from 'react'
+import Layout from '../../components/Layout'
 
 /**
 * @author
@@ -7,7 +8,9 @@ import React from 'react'
 
 const RegisterPage = (props) => {
   return(
-    <div>RegisterPage</div>
+    <Layout>
+      <div>RegisterPage</div>
+    </Layout>
    )
 
  }

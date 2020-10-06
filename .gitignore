@@ -25,3 +25,4 @@ yarn-error.log*
 # personal data
 firebase
 .env
+/src/index.js

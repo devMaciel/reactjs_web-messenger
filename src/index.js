@@ -1,23 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
-import dotenv from 'dotenv';
 import App from './App';
 
 import { Provider } from 'react-redux';
 import store from './store';
 
-dotenv.config();
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTHDOMAIN,
-  databaseURL: process.env.DATABASEURL,
-  projectId: process.env.PROJECTID,
-  storageBucket: process.env.STORAGEBUCKET,
-  messagingSenderId: process.env.MESSAGINGSENDERID,
-  appId: process.env.APPID
+  apiKey: "AIzaSyAaTlO8Cd1tE8DqDklP0OQg9a7P6oiulP8",
+  authDomain: "reactjs-web-messenger.firebaseapp.com",
+  databaseURL: "https://reactjs-web-messenger.firebaseio.com",
+  projectId: "reactjs-web-messenger",
+  storageBucket: "reactjs-web-messenger.appspot.com",
+  messagingSenderId: "59745116137",
+  appId: "1:59745116137:web:04d879659cbbfa8485b578"
 };
 
 // Initialize Firebase

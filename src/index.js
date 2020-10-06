@@ -4,6 +4,9 @@ import firebase from 'firebase';
 import dotenv from 'dotenv';
 import App from './App';
 
+import { Provider } from 'react-redux';
+import store from './store';
+
 dotenv.config();
 
 // Your web app's Firebase configuration
@@ -20,9 +23,13 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+window.store = store;
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );

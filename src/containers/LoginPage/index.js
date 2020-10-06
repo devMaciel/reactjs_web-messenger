@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Layout from '../../components/Layout'
-import Card from '../../components/Layout/UI/Card'
+import Card from '../../components/UI/Card'
 import './style.css'
 
 /**
@@ -20,6 +20,7 @@ const LoginPage = (props) => {
       <div className="loginContainer">
         <Card>
           <form action="">
+            <h3>Login</h3>
            
             <input 
               name="email"

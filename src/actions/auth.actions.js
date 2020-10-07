@@ -103,3 +103,23 @@ export const signin = (user) => {
 
     }
 }
+
+export const isLoggedInUser = () => {
+    return async dispatch => {
+        
+        const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
+
+        if(user){
+            dispatch({
+                type: `${authConstants.USER_LOGIN}_SUCCESS`,
+                payload: { user }
+            })
+        }else{
+            dispatch({
+                type: `${authConstants.USER_LOGIN}_FAILURE`,
+                payload: { error: 'Login failed' }
+            })
+        }
+
+    }
+}

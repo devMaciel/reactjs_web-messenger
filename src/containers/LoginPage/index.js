@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { signin } from '../../actions/auth.actions'
+import { isLoggedInUser, signin } from '../../actions/auth.actions'
 import Layout from '../../components/Layout'
 import Card from '../../components/UI/Card'
 import './style.css'
@@ -20,6 +20,13 @@ const LoginPage = (props) => {
   const dispatch = useDispatch();
   
   const auth = useSelector(state => state.auth);
+
+
+  // useEffect(() => {
+  //   if(!auth.authenticated){
+  //     dispatch(isLoggedInUser())
+  //   }
+  // }, []);
 
 
   const userLogin = (e) => {

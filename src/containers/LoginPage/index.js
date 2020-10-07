@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { signin } from '../../actions/auth.actions'
 import Layout from '../../components/Layout'
 import Card from '../../components/UI/Card'
@@ -17,6 +18,8 @@ const LoginPage = (props) => {
   const [password, setPassword] = useState('');
   
   const dispatch = useDispatch();
+  
+  const auth = useSelector(state => state.auth);
 
 
   const userLogin = (e) => {
@@ -34,6 +37,11 @@ const LoginPage = (props) => {
 
     dispatch(signin({email, password})); //then catch possible, return a promise
 
+  }
+
+  //logado
+  if(auth.authenticated){
+    return <Redirect to={'/'} />
   }
 
   return(

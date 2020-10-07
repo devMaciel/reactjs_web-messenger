@@ -1,10 +1,13 @@
 import { auth, firestore } from 'firebase';
+import { authConstants } from './constants';
 
 export const signup = (user) => {
     
     return async (dispatch) => {
 
         const db = firestore();
+
+        dispatch({type: `${authConstants.USER_LOGIN}_REQUEST`});
 
         auth()
         .createUserWithEmailAndPassword(user.email, user.password)
@@ -35,10 +38,20 @@ export const signup = (user) => {
                     }
 
                     localStorage.setItem('user', JSON.stringify(loggedInUser));
-                    console.log('User logged in successfully...!')
+                    console.log('User logged in successfully...!');
+                    
+                    dispatch({
+                        type: `${authConstants.USER_LOGIN}_SUCCESS`,
+                        payload: { user: loggedInUser }
+                    })
                 })
                 .catch(error => {
                     console.log(error);
+                    dispatch({
+                        type: `${authConstants.USER_LOGIN}_FAILURE`,
+                        payload: { error: error }
+                    
+                    });
                 });
             })
         })

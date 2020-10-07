@@ -61,3 +61,21 @@ export const signup = (user) => {
 
     }
 }
+
+
+export const signin = (user) => {
+    return async dispatch => {
+
+        dispatch({type: `${authConstants.USER_LOGIN}_REQUEST`});
+
+        auth()
+        .signInWithEmailAndPassword(user.email, user.password)
+        .then((data) =>{
+            console.log(data);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
+    }
+}

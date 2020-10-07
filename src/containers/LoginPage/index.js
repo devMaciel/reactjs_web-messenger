@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { signin } from '../../actions/auth.actions'
 import Layout from '../../components/Layout'
 import Card from '../../components/UI/Card'
 import './style.css'
@@ -13,13 +15,32 @@ const LoginPage = (props) => {
   //hooks
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+  const dispatch = useDispatch();
 
+
+  const userLogin = (e) => {
+    e.preventDefault();
+
+    if(email === ""){
+      alert("Email is required");
+      return;
+    }
+
+    if(password === ""){
+      alert("Password is required");
+      return;
+    }
+
+    dispatch(signin({email, password})); //then catch possible, return a promise
+
+  }
 
   return(
     <Layout>
       <div className="loginContainer">
         <Card>
-          <form action="">
+          <form onSubmit={userLogin}>
             <h3>Login</h3>
            
             <input 

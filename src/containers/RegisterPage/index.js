@@ -3,7 +3,8 @@ import Layout from '../../components/Layout'
 import Card from '../../components/UI/Card'
 import './style.css';
 import { signup } from '../../actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 /**
 * @author
@@ -18,6 +19,7 @@ const RegisterPage = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth);
 
   
   const registerUser = (e) => {
@@ -30,6 +32,11 @@ const RegisterPage = (props) => {
     
     dispatch(signup(user))
   };
+
+  //logado
+  if(auth.authenticated){
+    return <Redirect to={'/'} />
+  }
 
 
   return(

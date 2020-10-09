@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getRealtimeUsers } from '../../actions';
 import Layout from '../../components/Layout'
 import './style.css';
 
@@ -8,6 +10,17 @@ import './style.css';
 **/
 
 const HomePage = (props) => {
+
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth);
+  const user = useSelector(state => state.user);
+
+  useEffect(() => {
+    dispatch(getRealtimeUsers(auth.uid));
+  }, []);  
+
+//   console.log(user);
+
   return (
     <Layout>
     <section className="container">

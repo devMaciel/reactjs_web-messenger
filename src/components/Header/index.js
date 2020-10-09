@@ -40,7 +40,7 @@ const Header = (props) => {
            {
                auth.authenticated ?
                <li>
-                  <Link to={'#'} onClick={() => {dispatch(logout())}}>Logout</Link>
+                  <Link to={'#'} onClick={() => {dispatch(logout(auth.uid))}}>Logout</Link>
                </li> : null
            }
         </ul>

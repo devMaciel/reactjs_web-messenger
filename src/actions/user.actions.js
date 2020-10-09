@@ -15,6 +15,7 @@ export const getRealtimeUsers = (uid) => {
         // .where("uid", "!=", uid)
         .onSnapshot((querySnapshot) => {
             querySnapshot.forEach(function(doc) {
+                //pega todos users menos o que ta na conta, mesmo id
                 if(doc.data().uid != uid){
                     users.push(doc.data());
                 }

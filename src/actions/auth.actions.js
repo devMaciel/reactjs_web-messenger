@@ -123,3 +123,21 @@ export const isLoggedInUser = () => {
 
     }
 }
+
+export const logout = () => {
+    return async dispatch => {
+        dispatch({ type: `${authConstants.USER_LOGOUT}_REQUEST` });
+        //logout user
+
+        auth()
+        .signOut()
+        .then(() => {
+            localStorage.clear();
+            dispatch({type: `${authConstants.USER_LOGOUT}_SUCCESS`});
+        })
+        .catch(error => {
+            console.log(error);
+            dispatch({type: `${authConstants.USER_LOGOUT}_FAILURE`, payload: { error }});
+        })
+    }
+}

@@ -10,23 +10,25 @@ export const getRealtimeUsers = (uid) => {
         });
 
         const db = firestore();
-        const users = [];
-        db.collection("users")
+        const unsubscribe = db.collection("users")
         // .where("uid", "!=", uid)
         .onSnapshot((querySnapshot) => {
+            const users = [];
             querySnapshot.forEach(function(doc) {
                 //pega todos users menos o que ta na conta, mesmo id
                 if(doc.data().uid != uid){
                     users.push(doc.data());
                 }
             })
+            // console.log(users);
+
+            dispatch({
+                type: `${userConstants.GET_REALTIME_USERS}_SUCCESS`,
+                payload: { users }
+            })
+            
         });
 
-        // console.log(users);
-
-        dispatch({
-            type: `${userConstants.GET_REALTIME_USERS}_SUCCESS`,
-            payload: { users }
-        })
+        return unsubscribe;
     }
 }

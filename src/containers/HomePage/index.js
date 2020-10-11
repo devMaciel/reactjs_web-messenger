@@ -14,10 +14,29 @@ const HomePage = (props) => {
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth);
   const user = useSelector(state => state.user);
+  let unsubscribe;
 
   useEffect(() => {
-    dispatch(getRealtimeUsers(auth.uid));
+
+    unsubscribe = dispatch(getRealtimeUsers(auth.uid))
+    .then(unsubscribe => {
+        return unsubscribe;
+    })
+    .catch(error => {
+        console.log(error);
+    });
+
   }, []);  
+
+
+
+  useEffect(() => {
+    return () => {
+        //cleanup
+        unsubscribe.then(f => f()).catch(error => console.log(error));
+    }
+  }, []);
+
 
 //   console.log(user);
 

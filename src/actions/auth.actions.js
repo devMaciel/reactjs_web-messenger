@@ -76,22 +76,33 @@ export const signin = (user) => {
         .then((data) =>{
             console.log(data);
 
-            const name = data.user.displayName.split(" ");
-            const firstName = name[0];
-            const lastName = name[1];
-
-            const loggedInUser = {
-                firstName,
-                lastName,
-                uid: data.user.uid,
-                email: data.user.email
-            }
-
-            localStorage.setItem('user', JSON.stringify(loggedInUser));
-
-            dispatch({
-                type: `${authConstants.USER_LOGIN}_SUCCESS`,
-                payload: { user: loggedInUser }
+            const db = firestore();
+            db.collection('users')
+            .doc(data.user.uid)
+            .update({
+                isOnline: true
+            })
+            .then(() => {
+                const name = data.user.displayName.split(" ");
+                const firstName = name[0];
+                const lastName = name[1];
+    
+                const loggedInUser = {
+                    firstName,
+                    lastName,
+                    uid: data.user.uid,
+                    email: data.user.email
+                }
+    
+                localStorage.setItem('user', JSON.stringify(loggedInUser));
+    
+                dispatch({
+                    type: `${authConstants.USER_LOGIN}_SUCCESS`,
+                    payload: { user: loggedInUser }
+                })
+            })
+            .catch(error => {
+                console.log(error);
             })
 
         })

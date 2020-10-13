@@ -2,7 +2,6 @@
 npx create-react-app web-messenger
 npm install --save firebase
 npm install redux react-redux redux-thunk --save
-npm install dotenv
 npm install --save react-router-dom
 
 # SNIPPETS

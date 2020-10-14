@@ -1,0 +1,22 @@
+# DEPENDENCIES 
+npx create-react-app zapzap
+npm install --save firebase
+npm install --save react-router-dom
+npm install --save react-toastify
+npm i react-loading
+
+# SNIPPETS
+react-snippets (rfc, criar estrutura inicial da página/component)
+
+# FIREBASE 
+database cloud firestore (email/password auth)
+storage pra img (rules auth!=null)
+
+Collection::
+/users
+    url=string
+    name=string
+    email=string
+    password=string
+    description=string
+    messages=array (for notifications)

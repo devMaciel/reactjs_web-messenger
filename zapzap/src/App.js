@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { 
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  Redirect
+} from 'react-router-dom';
+import firebase from './Services/firebase';
+import { toast, toastContainer } from 'react-toastify';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//Components PAGES
+import Home from './Pages/Home/home';
+import Chat from './Pages/Chat/chat';
+import Profile from './Pages/Profile/profile';
+import Signup from './Pages/Signup/signup';
+import Login from './Pages/Login/login';
+
+class App extends Component {
+  
 }
 
 export default App;

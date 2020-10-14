@@ -35,3 +35,8 @@ ul li{
 a{
   text-decoration: none;
 }
+
+/*CUSTOM FOR THIS APP */
+button:active{opacity: 0.5s;}
+button:focus{outline: 0;}
+img:active{opacity: 0.5s;}

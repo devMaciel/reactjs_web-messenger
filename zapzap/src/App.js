@@ -16,7 +16,23 @@ import Signup from './Pages/Signup/signup';
 import Login from './Pages/Login/login';
 
 class App extends Component {
-  
+
+  //TOASTIFY notifications, database array 0
+  showToast = (type, message) => {
+    switch(type){
+      case 0:
+        toast.warning(message);
+        break;
+
+      case 1:
+        toast.success(message);
+        break;
+
+      default:
+        break;
+    }
+  }
+
 }
 
 export default App;

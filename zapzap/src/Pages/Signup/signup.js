@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import "./signup.css";
 import firebase from '../../Services/firebase';
+import LoginString from '../Login/loginstrings';
 
 import { Card } from 'react-bootstrap';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,6 +18,54 @@ export default class SignUp extends Component{
             password:"",
             name:"",
             error:null
+        };
+
+        // this.handleChange = this.handlechange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
+    }   
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleSubmit = async (event) =>{
+        const {name,password,email} = this.state;
+        event.preventDefault();
+        try{
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(async result => {
+                firebase.firestore().collection('users')
+                .add({
+                    name,
+                    id: result.user.uid,
+                    password,
+                    URL:'',
+                    messages:[{notificationId:"", number: 0}]
+                })
+                .then((docRef) =>{
+                    localStorage.setItem(LoginString.ID, result.user.uid);
+                    localStorage.setItem(LoginString.Name, name);
+                    localStorage.setItem(LoginString.Email, email);
+                    localStorage.setItem(LoginString.Password, password);
+                    localStorage.setItem(LoginString.PhotoURL, '');
+                    localStorage.setItem(LoginString.UPLOAD_CHANGED, 'state_changed');
+                    localStorage.setItem(LoginString.Description, '');
+                    localStorage.setItem(LoginString.FirebaseDocumentId, docRef.id);
+                    this.setState({
+                        name: '',
+                        password: '',
+                        url: '',
+                    });
+                    this.props.history.push("/chat");
+                })
+                .catch((error) =>{
+                    console.log("Error adding document", error);
+                })
+            });
+        }catch(error){
+            document.getElementById('1').innerHTML = "Error in Signin Up please try again";
         }
     }
 
@@ -68,7 +117,7 @@ export default class SignUp extends Component{
                             name="email"
                             autoComplete="email"
                             autoFocus
-                            onChange={this.handlechange}
+                            onChange={this.handleChange}
                             value={this.state.email}
                         />
 
@@ -89,7 +138,7 @@ export default class SignUp extends Component{
                             type="password"
                             autoComplete="current-password"
                             autoFocus
-                            onChange={this.handlechange}
+                            onChange={this.handleChange}
                             value={this.state.password}
                         />
 
@@ -103,7 +152,7 @@ export default class SignUp extends Component{
                             name="name"
                             autoComplete="name"
                             autoFocus
-                            onChange={this.handlechange}
+                            onChange={this.handleChange}
                             value={this.state.name}
                         />
 

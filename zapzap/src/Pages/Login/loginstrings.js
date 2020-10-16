@@ -1,3 +1,4 @@
+//Dummy Data
 const LoginString = {
     ID: 'id',
     PhotoURL: 'photoUrl',

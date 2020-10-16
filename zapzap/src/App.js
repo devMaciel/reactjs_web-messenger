@@ -3,10 +3,10 @@ import {
   Route,
   BrowserRouter as Router,
   Switch,
-  Redirect
+  // Redirect
 } from 'react-router-dom';
-import firebase from './Services/firebase';
-import { toast, ToastContainer, toastContainer } from 'react-toastify';
+// import firebase from './Services/firebase';
+import { toast, ToastContainer } from 'react-toastify';
 
 //Components PAGES
 import Home from './Pages/Home/home';
@@ -33,42 +33,8 @@ class App extends Component {
     }
   }
 
-  //constructor
-  constructor(){
-    super();
-    this.state = {
-      authenticated: false,
-      loading: true
-    }
-  }
-
-  //life cycle method (class componenet OLD)
-  componentDidMount(){
-    firebase.auth().onAuthStateChanged(user => {
-      
-      if(user){
-        this.setState({
-          authenticated: true,
-          loading: false
-        });
-      }else{
-        this.setState({
-          authenticated: false,
-          loading: false
-        })
-      }
-
-    });
-  }
-
   render(){
-    return this.state.loading === true ? (
-
-      <div className="spinner-border text-success" role='status'>
-        <span className="sr-only">Loading...</span>
-      </div>
-    
-    ) : (
+    return (
       <Router>
 
         <ToastContainer

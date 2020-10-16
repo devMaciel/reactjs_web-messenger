@@ -5,8 +5,13 @@ npm install --save react-router-dom
 npm install --save react-toastify
 npm i react-loading
 
+npm install @material-ui/core
+npm install react-bootstrap bootstrap
+
+
 # SNIPPETS
 react-snippets (rfc, criar estrutura inicial da página/component)
+
 
 # FIREBASE 
 database cloud firestore (email/password auth)

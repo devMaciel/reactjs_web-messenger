@@ -47,7 +47,7 @@
 .imgaround{
     border:1px solid #1ebea5;
     opacity: 0.2;
-    background-image: url(../../images/Placeholder.png);
+    /* background-image: url(../../images/Placeholder.png); */
     background-repeat: no-repeat;
     background-size: 200px 200px;
 }

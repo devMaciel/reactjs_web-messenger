@@ -42,6 +42,7 @@ export default class SignUp extends Component{
                     id: result.user.uid,
                     password,
                     URL:'',
+                    description:'',
                     messages:[{notificationId:"", number: 0}]
                 })
                 .then((docRef) =>{

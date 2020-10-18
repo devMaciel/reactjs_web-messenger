@@ -6,6 +6,7 @@ npm install --save react-toastify
 npm i react-loading
 
 npm install @material-ui/core
+npm install @material-ui/icons
 npm install react-bootstrap bootstrap
 
 

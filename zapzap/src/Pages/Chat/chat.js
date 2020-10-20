@@ -166,6 +166,62 @@ export default class Chat extends React.Component{
         return className;
     }
 
+    searchHandler = (event) => {
+        let searchQuery = event.target.value.toLowerCase(),
+        displayedContacts = this.searchUsers.filter((el) => {
+            let SearchValue = el.name.toLowerCase();
+
+            return SearchValue.indexOf(searchQuery) !== -1;
+        })
+
+        this.displayedContacts = displayedContacts;
+        this.displaySearchedContacts()
+    }
+
+    displaySearchedContacts = () => {
+        if(this.searchUsers.length > 0){
+            let viewListUser = [];
+            let className = "";
+            this.displayedContacts.map((item) => {
+                if(item.id != this.currentUserId){
+                    className = this.getClassnameforUserandNotification(item.id);
+                    viewListUser.push(
+                        <button 
+                            id={item.key}
+                            className = {className}
+                            onClick = {() => {
+                                this.notificationErase(item.id);
+                                this.setState({currentPeerUser: item})
+                                document.getElementById(item.key).style.backgroundColor = '#fff'
+                                document.getElementById(item.key).style.color = '#fff'
+                            }}
+                        >
+                            <img className="viewAvatarItem" src={item.URL} alt="" />
+                            <div className="viewWrapContentItem">
+                                <span className="textItem">
+                                    {`Name: ${item.name}`}
+                                </span>    
+                            </div> 
+
+                            { className === 'viewWrapItemNotification' ?
+                            <div className="notificationpragraph">
+                                <p id={item.key} className="newmessages">New messages</p>
+                            </div> : null }
+                            
+                        </button>
+                    )
+                }
+            })
+
+            this.setState({
+                displayedContacts: viewListUser
+            })
+
+        }else{
+            console.log('No user is online');
+        }
+    }
+
     componentDidMount(){
         firebase.firestore().collection('users').doc(this.currentUserDocumentId).get()
         .then((doc) => {
@@ -194,6 +250,18 @@ export default class Chat extends React.Component{
                             <img className="ProfilePicture" src={this.currentUserPhoto} alt="" onClick={this.onProfileClick}/>
                             <button className="Logout" onClick={this.logout}>Logout</button>
                         </div>
+
+                        <div className="rootsearchbar"> 
+                            <div className="input-container">
+                                <i className="fa fa-search"></i>
+                                <input className="input-field" 
+                                    type="text"
+                                    onChange={this.searchHandler}
+                                    placeholder="Search"
+                                />
+                            </div>
+                        </div>
+
                         {this.state.displayedContacts}
                     </div>
 

@@ -3,6 +3,8 @@ import LoginString from '../Login/loginstrings';
 import firebase from "../../Services/firebase";
 import './chat.css';
 import ReactLoading from 'react-loading';
+import ChatBox from '../ChatBox/chatbox';
+import WelcomeBoard from '../Welcome/welcome';
 
 export default class Chat extends React.Component{
     constructor(props){
@@ -255,6 +257,7 @@ export default class Chat extends React.Component{
                             <div className="input-container">
                                 <i className="fa fa-search"></i>
                                 <input className="input-field" 
+                                    id="searchingUsers"
                                     type="text"
                                     onChange={this.searchHandler}
                                     placeholder="Search"
@@ -265,6 +268,21 @@ export default class Chat extends React.Component{
                         {this.state.displayedContacts}
                     </div>
 
+
+                    <div className="viewBoard">
+                        {this.state.currentPeerUser ? 
+                            (
+                                <ChatBox /> 
+                            ) 
+                            : 
+                            ( 
+                                <WelcomeBoard 
+                                    currentUserName={this.currentUserName} 
+                                    currentUserPhoto={this.currentUserPhoto} 
+                                /> 
+                            )
+                        }
+                    </div>
 
                 </div>
             </div>

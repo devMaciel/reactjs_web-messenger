@@ -20,7 +20,7 @@ export default class Login extends Component{
         super(props);
         this.state = {
             isLoading : true,
-            error: "",
+            // error: "",
             email: "",
             password: ""
         }
@@ -49,7 +49,7 @@ export default class Login extends Component{
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        this.setState({error:""});
+        // this.setState({error:""});
 
         await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(async result => {
@@ -76,10 +76,11 @@ export default class Login extends Component{
             this.props.history.push('/chat')
         })
         .catch((error) => {
-            this.setState({
-                error: "Error while signing in, please try again"
-            })
+            // this.setState({
+            //     error: "Error while signing in, please try again"
+            // })
             // console.log(error);
+            document.getElementById('1').innerHTML="Incorrect email/password";
         });
     }
 
@@ -205,6 +206,9 @@ export default class Login extends Component{
                                 </Link>
                             </div>
 
+                            <div className="error">
+                                <p id="1" style={{ color:'red' }}></p>
+                            </div>
                         </form>
                     </div>
                 </Grid>
